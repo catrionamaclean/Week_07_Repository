@@ -1,0 +1,5 @@
+"0",""
+"0","Grampian2019 %>% "
+"0","  ggplot(aes(x = alcohol_admissions_log)) +             "
+"0","  geom_histogram(bins = 15) +           # make histogram"
+"0","  ggtitle(""Log of Grampian alcohol-related hospital admissions in 2019"") # add title"

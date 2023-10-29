@@ -1,0 +1,18 @@
+"0","glimpse(admission_data)
+"
+"1","Rows: 12,790"
+"1",""
+"1","
+"
+"1","Columns: 5"
+"1",""
+"1","
+"
+"1","$ area_name          [3m[38;5;246m<chr>[39m[23m ""Culter"", ""Cults, Bieldside & Milltimber West"", ""…
+$ area_code          [3m[38;5;246m<chr>[39m[23m ""S02001236"", ""S02001237"", ""S02001238"", ""S02001239…
+$ year               [3m[38;5;246m<dbl>[39m[23m 2010, 2010, 2010, 2010, 2010, 2010, 2010, 2010, 2…
+$ alcohol_admissions [3m[38;5;246m<dbl>[39m[23m 475.18, 732.32, 372.46, 1306.45, 359.21, 416.62, …
+$ health_board       [3m[38;5;246m<chr>[39m[23m ""Grampian"", ""Grampian"", ""Grampian"", ""Grampian"", ""…"
+"1",""
+"1","
+"

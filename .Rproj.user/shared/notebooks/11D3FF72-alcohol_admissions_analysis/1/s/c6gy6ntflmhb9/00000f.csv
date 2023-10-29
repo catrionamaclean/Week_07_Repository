@@ -1,0 +1,22 @@
+"0","glimpse(intermediate_zone_codes)
+"
+"1","Rows: 1,279"
+"1",""
+"1","
+"
+"1","Columns: 9"
+"1",""
+"1","
+"
+"1","$ IntZone     [3m[38;5;246m<chr>[39m[23m ""S02001236"", ""S02001237"", ""S02001238"", ""S02001239"", ""S02…
+$ IntZoneName [3m[38;5;246m<chr>[39m[23m ""Culter"", ""Cults, Bieldside and Milltimber West"", ""Cults…
+$ CA          [3m[38;5;246m<chr>[39m[23m ""S12000033"", ""S12000033"", ""S12000033"", ""S12000033"", ""S12…
+$ CAName      [3m[38;5;246m<chr>[39m[23m ""Aberdeen City"", ""Aberdeen City"", ""Aberdeen City"", ""Aber…
+$ HSCP        [3m[38;5;246m<chr>[39m[23m ""S37000001"", ""S37000001"", ""S37000001"", ""S37000001"", ""S37…
+$ HSCPName    [3m[38;5;246m<chr>[39m[23m ""Aberdeen City"", ""Aberdeen City"", ""Aberdeen City"", ""Aber…
+$ HB          [3m[38;5;246m<chr>[39m[23m ""S08000020"", ""S08000020"", ""S08000020"", ""S08000020"", ""S08…
+$ HBName      [3m[38;5;246m<chr>[39m[23m ""NHS Grampian"", ""NHS Grampian"", ""NHS Grampian"", ""NHS Gra…
+$ Country     [3m[38;5;246m<chr>[39m[23m ""S92000003"", ""S92000003"", ""S92000003"", ""S92000003"", ""S92…"
+"1",""
+"1","
+"

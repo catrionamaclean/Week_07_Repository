@@ -1,0 +1,24 @@
+"0","# non-parametric test for comparing more than two groups
+admission_data %>% 
+  filter(year == 2019,
+         health_board %in% c(""Grampian"", ""Fife"", ""Lothian"")) %>% 
+  kruskal.test(alcohol_admissions~health_board, data = .)
+"
+"1","
+"
+"1","	Kruskal-Wallis rank sum test"
+"1","
+"
+"1","
+"
+"1","data:  "
+"1",""
+"1","alcohol_admissions by health_board"
+"1",""
+"1","
+"
+"1","Kruskal-Wallis chi-squared = 15.516, df = 2, p-value = 0.0004274"
+"1","
+"
+"1","
+"
