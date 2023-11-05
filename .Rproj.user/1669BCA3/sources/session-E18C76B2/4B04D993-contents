@@ -1,0 +1,157 @@
+---
+title: "Week_07 - Practical Data Analysis With R"
+author: "Catriona Maclean"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Week 07 Practical Exercises with R
+
+## Aim
+
+Answer 3 questions by modifying the code given in the alcohol admissions example. 
+
+Exercise 1: For the alcohol-related hospital admission data per intermediate data zone (the data we used in the previous section), plot the data distributions for each health board in 2019.
+
+## Read in data
+Our data is saved in csv files, so we will use the read_csv function.
+
+```{r read-data}
+# alcohol-related hospital admissions
+data <- read_csv("data/scotpho_data_extract.csv") 
+
+# intermediate data zone info
+intermediate_zone_codes <- read_csv("data/iz2011_codes_and_labels_21042020.csv") 
+
+```
+
+```{r}
+glimpse(data)
+
+iz_data <- data %>%
+  filter(area_type == "Intermediate zone") %>%
+  select(area_name,area_code,year,measure)
+
+glimpse(intermediate_zone_codes)
+
+iz_info <- intermediate_zone_codes %>%
+  select(IntZone,HBName)
+
+```
+
+## Join the datasets
+Let's join the two datasets, so we know which health board each data zone belongs to.
+We will also remove "NHS" from the health board name, and rename a couple of the columns.
+
+```{r join-datasets}
+admission_data <- left_join(iz_data,iz_info, by = c("area_code" = "IntZone"))
+
+glimpse(admission_data)
+
+admission_data <- admission_data %>%
+  mutate(HBName = gsub("NHS ", "", HBName)) %>%
+  rename(health_board = HBName,
+         alcohol_admissions = measure)
+
+glimpse(admission_data)
+```
+
+## Select only the year we are interested in
+
+We want all health boards this time, so we don't select any specific ones
+
+```{r compare-Grampian-Fife}
+
+Year2019_data <- admission_data %>%                          
+  filter(year == 2019)      # only 2019
+         
+
+#histogram
+Year2019_data %>%                         
+  ggplot(aes(x = alcohol_admissions)) + 
+  geom_histogram(bins = 25) +
+  facet_wrap(~health_board)
+```
+
+### Question 2
+
+Exercise 2: For which health boards do we have data on alcohol-related hospital admissions for each deprivation quintile? (Hint: you can use the same geography dataset with intermediate zones that we used in the previous section to find the health board names. But there may be more suitable datasets on the geography codes and labels page.)
+
+The file "alcohol-admissions_deprivation-data.csv" contains data on the same indicator: alcohol-related hospital admissions (age-sex standardised rate per 100,000). It was built on the ScotPHO website, on the health inequalities panel. It contains the following columns:
+
+indicator: Alcohol-related hospital admissions
+geography_code: the Health Board code
+quintile: the Scottish Index of Multiple Deprivation quintile
+period: the financial year
+indicator_measure: the indicator value
+definition: Age-sex standardised rate per 100,000
+
+
+## Read in this data file
+
+
+```{r read-data}
+# alcohol-related hospital admissions
+deprivation_data <- read_csv("data/alcohol-admissions_deprivation-data.csv") 
+
+```
+
+
+```{r}
+
+hb_deprivation_data <- deprivation_data %>%
+    select(geography_code, quintile, indicator_measure)
+
+hb_info <- intermediate_zone_codes %>%
+  select(HB,HBName)
+
+```
+
+Join the two dataframes
+
+```{r}
+hb_deprivation_data <- left_join(hb_deprivation_data, hb_info, by = c("geography_code" = "HB"))
+
+glimpse(hb_deprivation_data)
+head(hb_deprivation_data)
+
+hb_deprivation_data <- hb_deprivation_data %>%
+  mutate(HBName = gsub("NHS ", "", HBName)) %>%
+  rename(health_board = HBName,
+         alcohol_admissions = indicator_measure)
+
+glimpse(hb_deprivation_data)
+head(hb_deprivation_data)
+
+
+hb_deprivation_data %>%
+  group_by(health_board) %>%
+  summarise(n()) %>%
+  arrange(health_board)
+```
+So, we can see that the data on alcohol admissions with deprivation only includes 2 health boards - Fife & Grampian.
+
+### Question 3
+
+Exercise 3: Create boxplots showing alcohol admissions for each deprivation quintile. Create a different plot for each health board in the data set. 
+
+
+```{r}
+# Creating boxplots for each health board in the data set
+# And a boxplot for each deprivation quintile
+
+# boxplot
+hb_deprivation_data  %>% 
+  filter(quintile != "Total") %>% # remove the total vales
+  ggplot(aes(x = quintile,             
+             y = alcohol_admissions)) +    
+  geom_boxplot() +                        
+  #geom_jitter(alpha = 0.4) + # don't add data points as it becomes too cluttered
+  theme(legend.position = "none") + # remove legend
+  facet_wrap(~health_board,
+             ncol = 2) # create boxplots for each health board
+```
+
